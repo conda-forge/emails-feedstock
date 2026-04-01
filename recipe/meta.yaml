@@ -1,5 +1,5 @@
 {% set name = "emails" %}
-{% set version = "0.6" %}
+{% set version = "1.0.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a4c2d67ea8b8831967a750d8edc6e77040d7693143fe280e6d2a367d9c36ff88
+  sha256: 2dcdf3dba5109499ce853c1b57dfda859c1052defd4fd7d59f97ee2f1dd02190
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
