@@ -21,12 +21,19 @@ requirements:
     - setuptools
   run:
     - python >={{ python_min }}
+    - dkimpy
+    - python-dateutil
+    - puremagic
+    # NOTE: these are in the "html" extra, split into own package later
     - chardet
     - cssutils
     - lxml
     - premailer
-    - python-dateutil
     - requests
+    # NOTE: in "jinja" extra
+    - jinja2
+    # NOTE: in async extra
+    # - aiosmtplib
 
 test:
   requires:
