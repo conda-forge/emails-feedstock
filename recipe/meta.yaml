@@ -1,5 +1,5 @@
 {% set name = "emails" %}
-{% set version = "0.6" %}
+{% set version = "1.1.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a4c2d67ea8b8831967a750d8edc6e77040d7693143fe280e6d2a367d9c36ff88
+  sha256: f2ac9d73d84e83d7f1a3924837fa15b59c0bce9bf658ac3b0b80398bc6d8b57d
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
@@ -21,22 +21,30 @@ requirements:
     - setuptools
   run:
     - python >={{ python_min }}
+    - dkimpy
+    - python-dateutil
+    - puremagic
+    # NOTE: these are in the "html" extra, split into own package later
     - chardet
     - cssutils
     - lxml
     - premailer
-    - python-dateutil
     - requests
+    # NOTE: in "jinja" extra
+    - jinja2
+    # NOTE: in async extra
+    # - aiosmtplib
 
 test:
   requires:
     - python {{ python_min }}
   imports:
     - emails
-    - emails.compat
+    - emails.backend
     - emails.loader
     - emails.store
     - emails.template
+    - emails.exc
     - emails.message
     - emails.signers
     - emails.transformer
