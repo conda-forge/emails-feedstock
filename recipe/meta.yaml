@@ -40,10 +40,11 @@ test:
     - python {{ python_min }}
   imports:
     - emails
-    - emails.compat
+    - emails.backend
     - emails.loader
     - emails.store
     - emails.template
+    - emails.exc
     - emails.message
     - emails.signers
     - emails.transformer
