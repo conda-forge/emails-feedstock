@@ -1,0 +1,73 @@
+schema_version: 1
+
+context:
+  name: emails
+  version: "1.1.2"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 9fd216b691704b3df9ad70073fc85945ba4e8eac80198233919cfa2488af8665
+
+build:
+  number: 1
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - python ${{ python_min }}
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+    - dkimpy
+    - python-dateutil
+    - puremagic
+    # NOTE: these are in the "html" extra, split into own package later
+    - chardet
+    - cssutils
+    - lxml
+    - premailer
+    - requests
+    # NOTE: in "jinja" extra
+    - jinja2
+    # NOTE: in async extra
+    # - aiosmtplib
+
+tests:
+  - python:
+      imports:
+        - emails
+        - emails.backend
+        - emails.loader
+        - emails.store
+        - emails.template
+        - emails.exc
+        - emails.message
+        - emails.signers
+        - emails.transformer
+        - emails.utils
+      pip_check: false
+      python_version:
+        - ${{ python_min }}
+        - "*"
+  - requirements:
+      run:
+        - python ${{ python_min }}
+
+about:
+  license: Apache-2.0
+  license_file: LICENSE
+  summary: Modern python library for emails
+  description: |
+    Modern python library for emails
+  homepage: https://github.com/lavr/python-emails/
+  repository: https://github.com/lavr/python-emails
+
+extra:
+  recipe-maintainers:
+    - timkpaine
