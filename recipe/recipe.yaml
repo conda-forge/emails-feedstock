@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: emails
-  version: "1.1.2"
+  version: "1.1.3"
 
 package:
   name: ${{ name|lower }}
@@ -10,10 +10,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
-  sha256: 9fd216b691704b3df9ad70073fc85945ba4e8eac80198233919cfa2488af8665
+  sha256: 935c70428c664f26e93b410673e59a763baa688886167fd1d50dc03506b17cc5
 
 build:
-  number: 1
+  number: 0
   noarch: python
   script: ${{ PYTHON }} -m pip install . -vv
 
